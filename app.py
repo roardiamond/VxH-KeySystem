@@ -178,7 +178,10 @@ def delete_key(key_id):
     conn.close()
     return redirect(url_for("admin_panel"))
 
+# -------- IMPORTANT FIX --------
+# Call init_db() at module level so it runs with gunicorn / Render
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
